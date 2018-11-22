@@ -10,21 +10,26 @@ client.on('message', message => {
         message.reply('pong');
       }
 });
+client.on("message", async message => {
+  if(message.author.bot) return;
+  if(message.channel.type === "dm") return;
 
-client.on('ready', async() => {
-var server = "493310015785140225"; // ايدي السررفر
-var channel = "494265034789093386";//ايدي الروم
-    setInterval(()=>{
-    client.guilds.get(server).channels.get(channel).send('**كودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودزكودز **')
-    },305);
-})
+  let prefix = "9";
+  let messageArray = message.content.split (" ");
+  let cmd = messageArray[0];
+  let args = messageArray.slice(1);
 
-client.on('ready', async() => {
-var server = "493310015785140225"; // ايدي السررفر
-var channel = "494265034789093386";//ايدي الروم
-    setInterval(()=>{
-    client.guilds.get(server).channels.get(channel).send('#daily')
-    },86400);
-})
+
+
+
+
+
+  if(cmd === `${prefix}say`){
+     if(!message.member.hasPermission("ADMINISTRATOR")) return message.reply("Oh hell noooo oof , You don't have permission biacht");
+    let botmessage = args.join(" ");
+    message.delete().catch();
+  message.channel.send(`${botmessage}`);
+  }
+});
 
 client.login(process.env.BOT_TOKEN);
